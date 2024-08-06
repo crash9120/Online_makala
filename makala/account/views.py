@@ -40,3 +40,37 @@ def login(request):
 def logout(request):
     auth_logout(request)
     return redirect('index')
+
+def change_password(request):
+    if request.method == 'POST':
+        old_password = request.POST['old_password']
+        new_password = request.POST['new_password']
+        confirm_password = request.POST['confirm_password']
+        
+        user = request.user
+        if user.check_password(old_password):
+            if new_password == confirm_password:
+                user.set_password(new_password)
+                user.save()
+                return redirect('profile')
+            else:
+                return render(request, 'profile.html', {'error': 'Parollarlar gabat gelenok'})
+        else:
+            return render(request, 'profile.html', {'error': 'Öňki parol nädogry'})
+    else:
+        return render(request, 'profile.html')
+    
+def change_personal_info(request):
+    if request.method == 'POST':
+        first_name = request.POST['first_name']
+        last_name = request.POST['last_name']
+        username = request.POST['username']
+        
+        user = request.user
+        user.first_name = first_name
+        user.last_name = last_name
+        user.username = username
+        user.save()
+        return redirect('profile')
+    else:
+        return render(request, 'profile.html')
