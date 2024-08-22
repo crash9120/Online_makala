@@ -10,6 +10,7 @@ class ArticleForm(forms.ModelForm):
     class Meta:
         model = models.Arcticle
         fields = '__all__'
+        exclude = ['user_name']
 
         widgets = {
             'title': forms.TextInput(
@@ -21,6 +22,5 @@ class ArticleForm(forms.ModelForm):
                 attrs={
                     'class': 'form-control',
     
-                }),
-                    
+                }), 
             }

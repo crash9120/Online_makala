@@ -55,6 +55,7 @@
 					</div>
 					<div class="col-lg-9 col-md-8 col-sm-12">
 						<div class="row">
+							{% if article_list %}
 							{% for article in article_list %}
 							<div class="col-md-6 col-lg-4 col-sm-6 m-b30">
 								<div class="cours-bx">
@@ -63,7 +64,7 @@
 										<a href="{% url 'article_detail' article.id %}" class="btn">Okamak</a>
 									</div>
 									<div class="info-bx text-center" style="min-height: 100px;max-height: 100px;">
-										<h5><a href="{% url 'article_detail' article.id %}">{{article.title}}</a></h5>
+										<h6><a href="{% url 'article_detail' article.id %}">{{article.title|slice:40}}...</a></h6>
 										<span>{{article.category}}</span>
 									</div>
 									<div class="cours-more-info">
@@ -89,6 +90,11 @@
 								<h1>Hiç hili makala tapylmady</h1>
 							</div>
 							{% endfor %}
+							{% else %}
+							<div class="col-md-6 col-lg-4 col-sm-6 m-b30">
+								<h1>Hiç hili makala tapylmady</h1>
+							</div>
+							{% endif %}
 
 							<div class="col-lg-12 m-b20">
 								<div class="pagination-bx rounded-sm gray clearfix">

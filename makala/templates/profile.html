@@ -33,7 +33,7 @@
 								<img src="assets/images/profile/pic1.jpg" alt="" />
 							</div>
 							<div class="profile-info">
-								<h4>{{request.user.first_name}} {{request.user.first_name}}</h4>
+								<h4>{{request.user.first_name}} {{request.user.last_name}}</h4>
 							</div>
 
 							<div class="profile-tabnav">
@@ -80,9 +80,9 @@
 																class="btn">Okamak</a>
 														</div>
 														<div class="info-bx text-center" style="min-height: 100px;">
-															<h5><a
-																	href="{% url 'article_detail' article.id %}">{{article.title}}</a>
-															</h5>
+															<h6><a
+																	href="{% url 'article_detail' article.id %}">{{article.title|slice:40}}...</a>
+															</h6>
 															<span>{{article.category}}</span>
 														</div>
 

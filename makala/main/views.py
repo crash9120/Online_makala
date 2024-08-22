@@ -62,6 +62,12 @@ def liked(request, article_id):
 def go_to_login(request):   
     return render(request, 'login_required.html')
 
+def base(request):   
+    return render(request, 'base.html')
+
+def about1(request):   
+    return render(request, 'about1.html')
+
 def search_article(request):
     if request.method == 'POST':
         article = request.POST['makala']
@@ -116,6 +122,7 @@ def profile(request):
     print(articles)
     categories = models.ArticleCategory.objects.all()
     form = ArticleForm()
+    
     context = {'categories': categories, 'form': form,'articles': articles}
     return render(request, 'profile.html',context)
 
@@ -124,6 +131,8 @@ def add_article(request):
     if request.method == 'POST':
        form = ArticleForm(request.POST, request.FILES)
        if form.is_valid():
-           form.save()
+           article = form.save(commit=False)
+           article.user_name = request.user.username
+           article.save()
            return redirect('profile')
        
